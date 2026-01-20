@@ -1,0 +1,78 @@
+```groovy
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google() // Google's Maven repository for Android libraries
+        mavenCentral() // Central repository for Java libraries
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.4.1" // Gradle plugin for Android development
+    }
+}
+
+// This section defines the repositories and dependencies for the app module.
+allprojects {
+    repositories {
+        google() 
+        mavenCentral() 
+    }
+}
+
+// Applying the Android application plugin and configuring the application module.
+apply plugin: 'com.android.application'
+
+// Android application configuration
+android {
+    compileSdk 33 // Setting compile SDK version to the latest for improved performance and features
+
+    defaultConfig {
+        applicationId "com.madhub.insbot" // Unique application ID for the app
+        minSdk 21 // Minimum SDK version; ensures app runs on a wide range of devices
+        targetSdk 33 // Target SDK; ensures compliance with the latest Android features and optimizations
+        versionCode 1 // Initial version code
+        versionName "1.0.0" // Initial version name
+
+        // Enables JNI and enables better performance for native code
+        externalNativeBuild {
+            cmake {
+                cppFlags "" // Placeholder for future native code integration
+            }
+        }
+    }
+
+    // Build types configuration
+    buildTypes {
+        release {
+            minifyEnabled false // Disables code shrinking for initial release; can be enabled for optimization later
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' // Proguard rules for obfuscation
+        }
+    }
+
+    // Enabling data binding for enhanced UI updates without performance overhead
+    buildFeatures {
+        dataBinding true // Improves efficiency by allowing automatic UI updates with LiveData
+    }
+
+    // Dependencies for the app module
+    dependencies {
+        implementation 'androidx.appcompat:appcompat:1.6.1' // Core support library for backwards compatibility
+        implementation 'androidx.core:core-ktx:1.10.0' // Additional Kotlin extensions for enhanced functionality
+        implementation 'com.google.android.material:material:1.9.0' // UI components that comply with Material Design
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0' // For managing background tasks effectively; improves UI responsiveness
+        implementation 'com.squareup.retrofit2:retrofit:2.9.0' // Networking library for seamless API integration; enhances data retrieval capabilities
+        implementation 'com.squareup.retrofit2:converter-gson:2.9.0' // GSON converter for Retrofit; simplifies JSON parsing
+        implementation 'com.google.code.gson:gson:2.10.1' // JSON serialization/deserialization; boosts data handling performance
+
+        // MadHub SDK integration for social media management automation
+        implementation 'com.madhub:mad-hub-sdk:1.0.0' // The SDK allows implementation of social media automation features seamlessly
+    }
+}
+
+// Expected outcomes from this configuration:
+// - The application can leverage MadHub's professional Android social media automation capabilities
+// - Continuous operations and background tasks improve user engagement and interaction efficiency
+// - Enhanced performance through Kotlin coroutines and Retrofit for smoother experiences in data handling
+// - Utilizing Material Design components can significantly boost user interface quality and user satisfaction
+```
+
+This `build.gradle` configuration is designed to emphasize the performance benefits and expected outcomes of using the integrated libraries and MadHub's SDK. By adhering to best practices in Android development, the setup not only ensures compliance with the technical specifications but also enhances the overall efficiency and capability of the application.
